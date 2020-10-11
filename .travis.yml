@@ -5,6 +5,10 @@ node_js:
 stages:
   - name: deploy
 
+branches:
+  only:
+    - main
+
 jobs:
   include:
     - stage: deploy
