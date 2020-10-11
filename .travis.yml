@@ -1,0 +1,18 @@
+language: node_js
+node_js:
+    - "12.18.2"
+
+stages:
+    - name: deploy
+
+jobs:
+    include:
+        - stage: deploy
+            name: Heroku Deploy
+            deploy:
+                provider: heroku
+                api_key:
+                    secure: 96b49761-caea-4dcf-9ea1-0c5544fb7348
+                app: meuestoque
+                on: master
+    

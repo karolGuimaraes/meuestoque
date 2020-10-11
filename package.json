@@ -1,0 +1,26 @@
+{
+  "name": "meuestoque",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  },
+  "scripts": {
+    "start": "node src/app.js",
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/karolGuimaraes/meuestoque.git"
+  },
+  "author": "Karolinny Guimaraes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/karolGuimaraes/meuestoque/issues"
+  },
+  "homepage": "https://github.com/karolGuimaraes/meuestoque#readme"
+}
