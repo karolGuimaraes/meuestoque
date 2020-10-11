@@ -11,7 +11,7 @@
     "nodemon": "^2.0.4"
   },
   "scripts": {
-    "start": "node src/app.js",
+    "start": "node src/app.js"
   },
   "repository": {
     "type": "git",
