@@ -12,7 +12,5 @@ jobs:
             deploy:
                 provider: heroku
                 api_key:
-                    secure: 96b49761-caea-4dcf-9ea1-0c5544fb7348
-                app: meuestoque
-                on: master
-    
+                    secure: "fprfJ1yLMSRiDxoBIzMgVbFKveHBkaiP2yEgTqN2bSQ4igUV4sekmmoV4U9Dl1suNvfKmIJ/8gUXLBT8Wt+BTHuvxqyYW/UuJYJ8OFkOohj7HeRWPgrBEAre6N1E2/HxAPu/F8myheiuAYseG/7hu75t9fK+84GjvGDNP8xtVPYdOH/KPxWa7adWCBENVver6Hk7fTShN0k0G/axMcNYlSdIR6CBLCyByvJaYuZ7wmbTx6TF04T1t4iYLu95dHaR98ZJn7eAJryJ3BHoUJJqhalyaTJwiK9V5KF6+BocCUbspMX5QOTE3B55H/pG95FgKwvhx8iDndh1txzq/8GB0b10gjsDElfh3fZjK2rMAmo9HOh1X5bNWiJir9DDbPj3pyHYwEQ3T7ty1S1bGdA2Po57bTQUUvYFJ8pBcFzmF8RPlNcyflgLBEXZeQTJQRrp5gH3uWrcAddNWP+C/1JHrPTOUdZOQHJPMkl9Ptg6PNeRFVWT26kr2Ej74Kp+nA2OJYCYX9bSi8MPNCZJQGlO9t8O1WVHAJmhdGOKNlNpd5xj/wuepVJ4bXdrUSoMjaUv010zn76WTRuqF28TpZlehVA65N2ZxzFhYYWeR2LICgnjbEmCMDQYgaiEI0He3nCAs7zm63J3j9m6QUPi8lb0+NSsFdLlUwpV4bTBWnIorUo="
+                app: meuestoque    
