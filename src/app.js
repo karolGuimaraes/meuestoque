@@ -11,7 +11,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 const userRoute = require('./routes/userRoute');
 const productRoute = require('./routes/productRoute');
+const categoryRoute = require('./routes/categoryRoute');
 const mainRoute = require('./routes/main');
-app.use('/', userRoute, productRoute, mainRoute);
+app.use('/', userRoute, productRoute, categoryRoute, mainRoute);
 
 app.listen(port, () => console.log(`Running in  http://${host}:${port}`));
