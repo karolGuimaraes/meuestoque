@@ -6,7 +6,6 @@ const UserModel = new mongoose.Schema({
     type: String,
     require: true
   },
-  lastname: String,
   name: String,
   password: {
     type: String,
