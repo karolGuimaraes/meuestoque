@@ -45,7 +45,7 @@ exports.update = async (req, res) => {
       return res.status(400).send({'error': 'User not found'});
     }
     const user = await User.updateOne({"_id" : ObjectId(id)}, data);
-    res.send(data);
+    res.send(user);
   } catch (err) {
     res.status(500).send('Error');
   }
