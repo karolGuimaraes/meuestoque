@@ -1,4 +1,5 @@
 const mongoose = require('../database');
+const uniqueValidator = require('mongoose-unique-validator');
 
 const ProductModel = new mongoose.Schema({
   code: {
@@ -18,6 +19,8 @@ const ProductModel = new mongoose.Schema({
     ref: "Category", 
   },
 })
+
+ProductModel.plugin(uniqueValidator, { message: '{PATH} already exists!' });
 
 const Product = mongoose.model('Product', ProductModel);
 
