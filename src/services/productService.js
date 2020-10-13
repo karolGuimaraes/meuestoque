@@ -1,78 +1,76 @@
-const express = require('express');
+const { isNull } = require('../utils/commons');
 const Product = require('../models/productModel');
-const ObjectId = require('mongodb').ObjectId;
 
-exports.list = async (req, res) => {
+const list = async (req, res) => {
   try {
     const products = await Product.find();
     res.send(products);
   } catch (err) {
-    res.status(500).send('Error');
+    res.status(500).send({message: err});
   }
 };
 
-exports.create = async (req, res) => {
-  const {code} = req.body;
+const create = async (req, res) => {
   try {
-    if(await Product.findOne({code})) {
-      return res.status(400).send({'error': 'Product alredy exists!'});
-    }
     const product = await Product.create(req.body);
     res.status(201).send(product);
   } catch (err) {
-    res.status(500).send('Error');
+    res.status(500).send({message: err});
   }
 };
 
-exports.getById = async (req, res) => {
+const getById = async (req, res) => {
   const {id} = req.params;
   try {
-    if(!await Product.findOne({"_id" : ObjectId(id)})) {
-      return res.status(400).send({'error': 'Product not found'});
+    const product = await Product.findOne({_id : id});
+    if(isNull(product)) {
+      return res.status(404).send({message: 'Product not found'});
     }
-    const product = await Product.findOne({"_id" : ObjectId(id)});
     res.send(product);
   } catch (err) {
-    res.status(500).send('Error');
+    res.status(500).send({message: err});
   }
 };
 
-exports.getByName = async (req, res) => {
+const getByName = async (req, res) => {
   const {name} = req.params;
   try {
-    if(!await Product.findOne({"name" : name})) {
-      return res.status(400).send({'error': 'Product not found'});
+    const product = await Product.findOne({name : name}); //Criar um index pra nome na collection Product
+    if(isNull(product)) {
+      return res.status(404).send({message: 'Product not found'});
     }
-    const product = await Product.findOne({"name" : name});
     res.send(product);
   } catch (err) {
-    res.status(500).send('Error');
+    res.status(500).send({message: err});
   }
 };
 
-exports.update = async (req, res) => {
+const update = async (req, res) => {
   const {id} = req.params;
   const data = req.body;
   try {
-    if(!await Product.findOne({"_id" : ObjectId(id)})) {
-      return res.status(400).send({'error': 'Product not found'});
-    }
-    const product = await Product.updateOne({"_id" : ObjectId(id)}, data);
+    const product = await Product.updateOne({_id : id}, data, {new: true});
     res.send(product);
   } catch (err) {
-    res.status(500).send('Error');
+    res.status(500).send({message: err});
   }
 };
 
-exports.delete = async (req, res) => {
+const remove = async (req, res) => {
   const {id} = req.params;
   try {
-    if(!await Product.findOne({"_id" : ObjectId(id)})) {
-      return res.status(400).send({'error': 'Product not found'});
-    }
-    await Product.deleteOne({"_id" : ObjectId(id)});
-    res.status(200).send('X');
+    await Product.deleteOne({_id : id});
+    res.status(200).send({message: 'Product deleted'});
   } catch (err) {
-    res.status(500).send('Error');
+    res.status(500).send({message: err});
   }
 };
+
+module.exports = {
+  list, 
+  create,
+  getById,
+  getByName, 
+  update, 
+  remove
+}

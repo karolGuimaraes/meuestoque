@@ -1,4 +1,5 @@
 const mongoose = require('../database');
+const uniqueValidator = require('mongoose-unique-validator');
 
 const CategorytModel = new mongoose.Schema({
   name: {
@@ -8,6 +9,8 @@ const CategorytModel = new mongoose.Schema({
   },
   description: String,
 });
+
+CategorytModel.plugin(uniqueValidator, { message: '{PATH} already exists!' });
 
 const Category = mongoose.model('Category', CategorytModel);
 

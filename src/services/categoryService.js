@@ -1,8 +1,7 @@
-const express = require('express');
+const { isNull } = require('../utils/commons');
 const Category = require('../models/categoryModel');
-const ObjectId = require('mongodb').ObjectId;
 
-exports.list = async (req, res) => {
+const list = async (req, res) => {
   try {
     const categories = await Category.find();
     res.send(categories);
@@ -11,12 +10,8 @@ exports.list = async (req, res) => {
   }
 };
 
-exports.create = async (req, res) => {
-  const {name} = req.body;
+const create = async (req, res) => {
   try {
-    if(await Category.findOne({name})) {
-      return res.status(400).send({'error': 'Category alredy exists!'});
-    }
     const category = await Category.create(req.body);
     res.status(201).send(category);
   } catch (err) {
@@ -24,55 +19,58 @@ exports.create = async (req, res) => {
   }
 };
 
-exports.getById = async (req, res) => {
+const getById = async (req, res) => {
   const {id} = req.params;
   try {
-    if(!await Category.findOne({"_id" : ObjectId(id)})) {
-      return res.status(400).send({'error': 'Category not found'});
+    const category = await Category.findOne({_id : id});
+    if(isNull(category)) {
+      return res.status(404).send({message: 'Category not found'});
     }
-    const category = await Category.findOne({"_id" : ObjectId(id)});
     res.send(category);
   } catch (err) {
     res.status(500).send('Error');
   }
 };
 
-exports.getByName = async (req, res) => {
+const getByName = async (req, res) => {
   const {name} = req.params;
   try {
-    if(!await Category.findOne({"name" : name})) {
-      return res.status(400).send({'error': 'Category not found'});
+    const category = await Category.findOne({name : name}); //Criar um index pra nome na collection Category
+    if(isNull(category)) {
+      return res.status(404).send({message: 'Category not found'});
     }
-    const category = await Category.findOne({"name" : name});
     res.send(category);
   } catch (err) {
     res.status(500).send('Error');
   }
 };
 
-exports.update = async (req, res) => {
+const update = async (req, res) => {
   const {id} = req.params;
   const data = req.body;
   try {
-    if(!await Category.findOne({"_id" : ObjectId(id)})) {
-      return res.status(400).send({'error': 'Category not found'});
-    }
-    const category = await Category.updateOne({"_id" : ObjectId(id)}, data);
+    const category = await Category.updateOne({_id : id}, data, {new: true});
     res.send(category);
   } catch (err) {
     res.status(500).send('Error');
   }
 };
 
-exports.delete = async (req, res) => {
+const remove = async (req, res) => {
   const {id} = req.params;
   try {
-    if(!await Category.findOne({"_id" : ObjectId(id)})) {
-      return res.status(400).send({'error': 'Category not found'});
-    }
-    await Category.deleteOne({"_id" : ObjectId(id)});
-    res.status(200).send('X');
+    await Category.deleteOne({_id: id});
+    res.status(200).send({message: 'Category deleted'});
   } catch (err) {
     res.status(500).send('Error');
   }
 };
+
+module.exports = {
+  list, 
+  create,
+  getById,
+  getByName, 
+  update, 
+  remove
+}

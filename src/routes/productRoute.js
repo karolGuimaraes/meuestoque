@@ -13,6 +13,6 @@ router.get('/products/:name', ProductService.getByName);
 
 router.put('/products/:id', ProductService.update);
 
-router.delete('/products/:id', ProductService.delete);
+router.delete('/products/:id', ProductService.remove);
 
 module.exports = router;

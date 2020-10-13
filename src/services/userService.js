@@ -1,65 +1,62 @@
-const express = require('express');
 const User = require('../models/userModel');
-const ObjectId = require('mongodb').ObjectId
+const { isNull } = require('../utils/commons');
 
-exports.list = async (req, res) => {
+const list = async (req, res) => {
   try {
     const users = await User.find();
     res.send(users);
   } catch (err) {
-    res.status(500).send('Error');
+    res.status(500).send({message: err});
   }
 };
 
-exports.create = async (req, res) => {
-  const {email} = req.body;
+const create = async (req, res) => {
   try {
-    if(await User.findOne({email})) {
-      return res.status(400).send({'error': 'User alredy exists!'});
-    }
     const user = await User.create(req.body);
     res.status(201).send(user);
   } catch (err) {
-    res.status(500).send('Error');
+    res.status(500).send({message: err});
   }
 };
 
-exports.getById = async (req, res) => {
+const getById = async (req, res) => {
   const {id} = req.params;
   try {
-    if(!await User.findOne({"_id" : ObjectId(id)})) {
-      return res.status(400).send({'error': 'User not found'});
+    const user = await User.findOne({_id : id});
+    if(isNull(user)) {
+      return res.status(404).send({message: 'User not found'});
     }
-    const user = await User.findOne({"_id" : ObjectId(id)});
     res.send(user);
   } catch (err) {
-    res.status(500).send('Error');
+    res.status(500).send({message: err});
   }
 };
 
-exports.update = async (req, res) => {
+const update = async (req, res) => {
   const {id} = req.params;
   const data = req.body;
   try {
-    if(!await User.findOne({"_id" : ObjectId(id)})) {
-      return res.status(400).send({'error': 'User not found'});
-    }
-    const user = await User.updateOne({"_id" : ObjectId(id)}, data);
+    const user = await User.updateOne({_id : id}, data, {new: true});
     res.send(user);
   } catch (err) {
-    res.status(500).send('Error');
+    res.status(500).send({message: err});
   }
 };
 
-exports.delete = async (req, res) => {
+const remove = async (req, res) => {
   const {id} = req.params;
   try {
-    if(!await User.findOne({"_id" : ObjectId(id)})) {
-      return res.status(400).send({'error': 'User not found'});
-    }
-    await User.deleteOne({"_id" : ObjectId(id)});
-    res.status(200).send('X');
+    await User.deleteOne({_id : id});
+    res.status(200).send({message: 'User deleted'});
   } catch (err) {
-    res.status(500).send('Error');
+    res.status(500).send({message: err});
   }
 };
+
+module.exports = {
+  list, 
+  create, 
+  getById, 
+  update, 
+  remove
+}
