@@ -13,6 +13,6 @@ router.get('/categories/:name', CategoryService.getByName);
 
 router.put('/categories/:id', CategoryService.update);
 
-router.delete('/categories/:id', CategoryService.delete);
+router.delete('/categories/:id', CategoryService.remove);
 
 module.exports = router;
