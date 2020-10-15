@@ -20,6 +20,10 @@ const ProductModel = new mongoose.Schema({
   },
 })
 
+// ProductModel.methods.quantity = function(){
+//   return (Invoice.countDocuments() - .countDocuments())
+// }
+
 ProductModel.plugin(uniqueValidator, { message: '{PATH} already exists!' });
 
 const Product = mongoose.model('Product', ProductModel);
