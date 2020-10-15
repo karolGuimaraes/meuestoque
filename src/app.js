@@ -16,10 +16,12 @@ app.use((req, res, next) => {
   next();
 });
 
+const mainRoute = require('./routes/main');
 const userRoute = require('./routes/userRoute');
 const productRoute = require('./routes/productRoute');
 const categoryRoute = require('./routes/categoryRoute');
-const mainRoute = require('./routes/main');
-app.use('/', userRoute, productRoute, categoryRoute, mainRoute);
+const customerRoute = require('./routes/customerRoute');
+app.use('/', mainRoute, userRoute, productRoute, 
+            categoryRoute, customerRoute);
 
-app.listen(port, () => console.log(`Running in  http://${host}:${port}`));
+app.listen(port, () => console.log(`Running in http://${host}:${port}`));
