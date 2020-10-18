@@ -11,7 +11,6 @@ const ProductModel = new mongoose.Schema({
   description: String,
   link: String,
   saleprice: Number,
-  link: String,
   size: String,
   material: String,
   category: { 

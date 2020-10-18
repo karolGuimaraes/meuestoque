@@ -1,5 +1,5 @@
 const { isNull } = require('../utils/commons');
-const Product = require('../models/productModel');
+const Product = require('../models/product.model');
 
 const list = async (req, res) => {
   try {

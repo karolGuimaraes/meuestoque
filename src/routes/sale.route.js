@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const SaleService = require('../services/saleService');
+const SaleService = require('../services/sale.service');
 
 router.get('/sales', SaleService.list);
 

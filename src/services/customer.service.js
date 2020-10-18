@@ -1,10 +1,10 @@
 const { isNull } = require('../utils/commons');
-const Sale = require('../models/saleModel');
+const Customer = require('../models/customer.model');
 
 const list = async (req, res) => {
   try {
-    const sales = await Sale.find();
-    res.send(sales);
+    const customers = await Customer.find();
+    res.send(customers);
   } catch (err) {
     res.status(500).send({message: err});
   }
@@ -12,8 +12,8 @@ const list = async (req, res) => {
 
 const create = async (req, res) => {
   try {
-    const sale = await Sale.create(req.body);
-    res.status(201).send(sale);
+    const customer = await Customer.create(req.body);
+    res.status(201).send(customer);
   } catch (err) {
     res.status(500).send({message: err});
   }
@@ -22,11 +22,11 @@ const create = async (req, res) => {
 const getById = async (req, res) => {
   const {id} = req.params;
   try {
-    const sale = await Sale.findOne({_id : id});
-    if(isNull(sale)) {
-      return res.status(404).send({message: 'Sale not found'});
+    const customer = await Customer.findOne({_id : id});
+    if(isNull(customer)) {
+      return res.status(404).send({message: 'Customer not found'});
     }
-    res.send(sale);
+    res.send(customer);
   } catch (err) {
     res.status(500).send({message: err});
   }
@@ -35,11 +35,11 @@ const getById = async (req, res) => {
 const getByName = async (req, res) => {
   const {name} = req.params;
   try {
-    const sale = await Sale.findOne({name : name});
-    if(isNull(sale)) {
-      return res.status(404).send({message: 'Sale not found'});
+    const customer = await Customer.findOne({name : name});
+    if(isNull(customer)) {
+      return res.status(404).send({message: 'Customer not found'});
     }
-    res.send(sale);
+    res.send(customer);
   } catch (err) {
     res.status(500).send({message: err});
   }
@@ -49,8 +49,8 @@ const update = async (req, res) => {
   const {id} = req.params;
   const data = req.body;
   try {
-    const sale = await Sale.updateOne({_id : id}, data, {new: true});
-    res.send(sale);
+    const customer = await Customer.updateOne({_id : id}, data, {new: true});
+    res.send(customer);
   } catch (err) {
     res.status(500).send({message: err});
   }
@@ -59,8 +59,8 @@ const update = async (req, res) => {
 const remove = async (req, res) => {
   const {id} = req.params;
   try {
-    await Sale.deleteOne({_id : id});
-    res.status(200).send({message: 'Sale deleted'});
+    await Customer.deleteOne({_id : id});
+    res.status(200).send({message: 'Customer deleted'});
   } catch (err) {
     res.status(500).send({message: err});
   }

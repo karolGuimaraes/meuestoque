@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const CategoryService = require('../services/categoryService');
+const CategoryService = require('../services/category.service');
 
 router.get('/categories', CategoryService.list);
 

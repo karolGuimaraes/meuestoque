@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const InvoiceService = require('../services/invoiceService');
+const InvoiceService = require('../services/invoice.service');
 
 router.get('/invoices', InvoiceService.list);
 

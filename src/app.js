@@ -17,11 +17,11 @@ app.use((req, res, next) => {
 });
 
 const mainRoute = require('./routes/main');
-const userRoute = require('./routes/userRoute');
-const productRoute = require('./routes/productRoute');
-const categoryRoute = require('./routes/categoryRoute');
-const customerRoute = require('./routes/customerRoute');
-const invoiceRoute = require('./routes/invoiceRoute');
+const userRoute = require('./routes/user.route');
+const productRoute = require('./routes/product.route');
+const categoryRoute = require('./routes/category.route');
+const customerRoute = require('./routes/customer.route');
+const invoiceRoute = require('./routes/invoice.route');
 app.use('/', mainRoute, userRoute, productRoute, 
             categoryRoute, customerRoute, invoiceRoute);
 
