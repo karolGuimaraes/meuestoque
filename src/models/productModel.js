@@ -20,9 +20,9 @@ const ProductModel = new mongoose.Schema({
   },
 })
 
-// ProductModel.methods.quantity = function(){
-//   return (Invoice.countDocuments() - .countDocuments())
-// }
+ProductModel.methods.quantity = function(){
+  return (Invoice.count({'items.Product': this}) - Sale.count({'items.Product': this}))
+}
 
 ProductModel.plugin(uniqueValidator, { message: '{PATH} already exists!' });
 
