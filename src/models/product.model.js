@@ -8,10 +8,15 @@ const ProductModel = new mongoose.Schema({
     require: true
   },
   name: String,
+  image: { 
+    data: Buffer, 
+    contentType: String 
+  },
   description: String,
   link: String,
   saleprice: Number,
   size: String,
+  color: String,
   material: String,
   category: { 
     type: mongoose.Schema.Types.ObjectId, 

@@ -1,6 +1,32 @@
 const mongoose = require('../database');
 const uniqueValidator = require('mongoose-unique-validator');
 
+const PaymentModel = new mongoose.Schema({
+  type: {
+    type: String,
+    enum: ['Dinheiro', 'Transfêrencia', 'Débito', 'Crédito'],
+    default: 'Dinheiro'
+  },
+  value: {
+    type: Number, 
+    required: true 
+  },
+  ispaid: { type: Boolean, default: false },
+});
+
+const ItemModel = new mongoose.Schema({
+  product: { 
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: "Product",
+    required: true 
+  },
+  quantity:  {
+    type: Number, 
+    required: true 
+  },
+  price: Number,
+});
+
 const SaleModel = new mongoose.Schema({
   date: {
     type: Date, 
@@ -10,15 +36,18 @@ const SaleModel = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId, 
     ref: "Customer", 
   },
-  items: [{
-    product: { 
-      type: mongoose.Schema.Types.ObjectId, 
-      ref: "Product", 
-    },
-    quantity: Number,
-    saleprice: Number,
-  }],
-  description: String,
+  items: [ItemModel],
+  status: {
+    type: String,
+    enum: ['Aberto', 'Aguardando Pagamento', 'Pago', 
+          'Enviado', 'Finalizado', 'Cancelado'],
+    default: 'Aberto'
+  },
+  payment: [PaymentModel],
+  note: String,
+  deliveryfee: Number,
+  freight: Number,
+  trackingcode: String,
 });
 
 SaleModel.plugin(uniqueValidator, { message: '{PATH} already exists!' });

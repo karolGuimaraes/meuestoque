@@ -57,7 +57,6 @@ module.exports = {
   list, 
   create,
   getById,
-  getByName, 
   update, 
   remove
 }

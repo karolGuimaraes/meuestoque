@@ -1,11 +1,22 @@
 const mongoose = require('../database');
 const uniqueValidator = require('mongoose-unique-validator');
 
+const AddressModel = new mongoose.Schema({
+  zipcode: String,
+  street: String,
+  district: String,
+  complement: String,
+  city: String,
+  state: String
+});
+
 const CustomerModel = new mongoose.Schema({
-  name: String,
+  firstname: String,
+  lastname: String,
   reference: String,
   phone: String,
-  instagram: String
+  instagram: String,
+  address: AddressModel
 });
 
 CustomerModel.plugin(uniqueValidator, { message: '{PATH} already exists!' });
