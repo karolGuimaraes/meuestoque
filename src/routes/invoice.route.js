@@ -5,12 +5,12 @@ const InvoiceService = require('../services/invoice.service');
 
 router.get('/invoices', InvoiceService.list);
 
-router.post('/invoices', InvoiceService.create);
+router.post('/invoice', InvoiceService.create);
 
-router.get('/invoices/:id', InvoiceService.getById);
+router.get('/invoice/:id', InvoiceService.getById);
 
-router.put('/invoices/:id', InvoiceService.update);
+router.put('/invoice/:id', InvoiceService.update);
 
-router.delete('/invoices/:id', InvoiceService.remove);
+router.delete('/invoice/:id', InvoiceService.remove);
 
 module.exports = router;

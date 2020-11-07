@@ -1,26 +1,24 @@
 const mongoose = require('../database');
 const uniqueValidator = require('mongoose-unique-validator');
 
-const ItemModel = new mongoose.Schema({
-  product: { 
-    type: mongoose.Schema.Types.ObjectId, 
-    ref: "Product",
-    required: true 
-  },
-  quantity:  {
-    type: Number, 
-    required: true 
-  },
-  price: Number,
-});
-
 const InvoiceModel = new mongoose.Schema({
   provider: String,
   date: {
     type: Date, 
     default: Date.now
   },
-  items: [ItemModel],
+  items: [{
+    product: { 
+      type: mongoose.Schema.Types.ObjectId, 
+      ref: "Product",
+      required: true 
+    },
+    quantity: {
+      type: Number, 
+      required: true 
+    },
+    price: Number,
+  }],
 });
 
 InvoiceModel.plugin(uniqueValidator, { message: '{PATH} already exists!' });

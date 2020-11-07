@@ -32,19 +32,6 @@ const getById = async (req, res) => {
   }
 };
 
-const getByName = async (req, res) => {
-  const {name} = req.params;
-  try {
-    const sale = await Sale.findOne({name : name});
-    if(isNull(sale)) {
-      return res.status(404).send({message: 'Sale not found'});
-    }
-    res.send(sale);
-  } catch (err) {
-    res.status(500).send({message: err});
-  }
-};
-
 const update = async (req, res) => {
   const {id} = req.params;
   const data = req.body;
@@ -70,7 +57,6 @@ module.exports = {
   list, 
   create,
   getById,
-  getByName, 
   update, 
   remove
 }

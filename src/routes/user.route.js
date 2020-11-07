@@ -5,12 +5,12 @@ const UserService = require('../services/user.service');
 
 router.get('/users', UserService.list);
 
-router.post('/users', UserService.create);
+router.post('/user', UserService.create);
 
-router.get('/users/:id', UserService.getById);
+router.get('/user/:id', UserService.getById);
 
-router.put('/users/:id', UserService.update);
+router.put('/user/:id', UserService.update);
 
-router.delete('/users/:id', UserService.remove);
+router.delete('/user/:id', UserService.remove);
 
 module.exports = router;

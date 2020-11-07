@@ -3,11 +3,6 @@ const mongoose = require('../database');
 const uniqueValidator = require('mongoose-unique-validator');
 
 const UserModel = new mongoose.Schema({
-  username: {
-    type: String,
-    require: true
-  },
-  name: String,
   password: {
     type: String,
     require: true,
@@ -19,9 +14,8 @@ const UserModel = new mongoose.Schema({
     require: true,
     lowercase: true
   },
+  name: String,
   phone: String,
-  lastlogin: Date,
-  admin: Boolean
 })
 
 UserModel.pre('save', async function(next) {

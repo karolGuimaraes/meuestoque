@@ -5,14 +5,14 @@ const CustomerService = require('../services/customer.service');
 
 router.get('/customers', CustomerService.list);
 
-router.post('/customers', CustomerService.create);
+router.post('/customer', CustomerService.create);
 
-router.get('/customers/:id', CustomerService.getById);
+router.get('/customer/:id', CustomerService.getById);
 
-router.get('/customers/:name', CustomerService.getByName);
+router.get('/customer/search/:name', CustomerService.getByName);
 
-router.put('/customers/:id', CustomerService.update);
+router.put('/customer/:id', CustomerService.update);
 
-router.delete('/customers/:id', CustomerService.remove);
+router.delete('/customer/:id', CustomerService.remove);
 
 module.exports = router;

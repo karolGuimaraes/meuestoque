@@ -5,14 +5,14 @@ const CategoryService = require('../services/category.service');
 
 router.get('/categories', CategoryService.list);
 
-router.post('/categories', CategoryService.create);
+router.post('/category', CategoryService.create);
 
-router.get('/categories/:id', CategoryService.getById);
+router.get('/category/:id', CategoryService.getById);
 
-router.get('/categories/:name', CategoryService.getByName);
+router.get('/category/search/:name', CategoryService.getByName);
 
-router.put('/categories/:id', CategoryService.update);
+router.put('/category/:id', CategoryService.update);
 
-router.delete('/categories/:id', CategoryService.remove);
+router.delete('/category/:id', CategoryService.remove);
 
 module.exports = router;

@@ -41,7 +41,7 @@ const getByName = async (req, res) => {
     }
     res.send(category);
   } catch (err) {
-    res.status(500).send('Error');
+    res.status(500).send(err);
   }
 };
 

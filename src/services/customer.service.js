@@ -35,7 +35,7 @@ const getById = async (req, res) => {
 const getByName = async (req, res) => {
   const {name} = req.params;
   try {
-    const customer = await Customer.findOne({name : name});
+    const customer = await Customer.find({firstname : name});
     if(isNull(customer)) {
       return res.status(404).send({message: 'Customer not found'});
     }

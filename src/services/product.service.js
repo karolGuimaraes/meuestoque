@@ -35,7 +35,7 @@ const getById = async (req, res) => {
 const getByName = async (req, res) => {
   const {name} = req.params;
   try {
-    const product = await Product.findOne({name : name}); //Criar um index pra nome na collection Product
+    const product = await Product.find({name : name}); //Criar um index pra nome na collection Product
     if(isNull(product)) {
       return res.status(404).send({message: 'Product not found'});
     }

@@ -7,7 +7,10 @@ const ProductModel = new mongoose.Schema({
     unique: true,
     require: true
   },
-  name: String,
+  name: {
+    type: String,
+    require: true
+  },
   image: { 
     data: Buffer, 
     contentType: String 
@@ -15,7 +18,12 @@ const ProductModel = new mongoose.Schema({
   description: String,
   link: String,
   saleprice: Number,
-  size: String,
+  size: {
+    type: String,
+    enum: ['U', 'P', 'M', 'G', 'GG'],
+    default: 'U',
+    require: true
+  },
   color: String,
   material: String,
   category: { 

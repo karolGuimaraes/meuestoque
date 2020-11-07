@@ -5,14 +5,12 @@ const SaleService = require('../services/sale.service');
 
 router.get('/sales', SaleService.list);
 
-router.post('/sales', SaleService.create);
+router.post('/sale', SaleService.create);
 
-router.get('/sales/:id', SaleService.getById);
+router.get('/sale/:id', SaleService.getById);
 
-router.get('/sales/:name', SaleService.getByName);
+router.put('/sale/:id', SaleService.update);
 
-router.put('/sales/:id', SaleService.update);
-
-router.delete('/sales/:id', SaleService.remove);
+router.delete('/sale/:id', SaleService.remove);
 
 module.exports = router;

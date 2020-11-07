@@ -5,14 +5,14 @@ const ProductService = require('../services/product.service');
 
 router.get('/products', ProductService.list);
 
-router.post('/products', ProductService.create);
+router.post('/product', ProductService.create);
 
-router.get('/products/:id', ProductService.getById);
+router.get('/product/:id', ProductService.getById);
 
-router.get('/products/:name', ProductService.getByName);
+router.get('/product/search/:name', ProductService.getByName);
 
-router.put('/products/:id', ProductService.update);
+router.put('/product/:id', ProductService.update);
 
-router.delete('/products/:id', ProductService.remove);
+router.delete('/product/:id', ProductService.remove);
 
 module.exports = router;
