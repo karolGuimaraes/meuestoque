@@ -2,7 +2,11 @@ const mongoose = require('../database');
 const uniqueValidator = require('mongoose-unique-validator');
 
 const PurchaseModel = new mongoose.Schema({
-  provider: String,
+  provider: { 
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: "Provider",
+    required: true 
+  },
   date: {
     type: Date, 
     default: Date.now
