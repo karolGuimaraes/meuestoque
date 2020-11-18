@@ -1,10 +1,10 @@
 const { isNull } = require('../utils/commons');
-const Invoice = require('../models/invoice.model');
+const Purchase = require('../models/purchase.model');
 
 const list = async (req, res) => {
   try {
-    const invoices = await Invoice.find();
-    res.send(invoices);
+    const purchases = await Purchase.find();
+    res.send(purchases);
   } catch (err) {
     res.status(500).send({message: err});
   }
@@ -12,8 +12,8 @@ const list = async (req, res) => {
 
 const create = async (req, res) => {
   try {
-    const invoice = await Invoice.create(req.body);
-    res.status(201).send(invoice);
+    const purchase = await Purchase.create(req.body);
+    res.status(201).send(purchase);
   } catch (err) {
     res.status(500).send({message: err});
   }
@@ -22,11 +22,11 @@ const create = async (req, res) => {
 const getById = async (req, res) => {
   const {id} = req.params;
   try {
-    const invoice = await Invoice.findOne({_id : id});
-    if(isNull(invoice)) {
-      return res.status(404).send({message: 'Invoice not found'});
+    const purchase = await Purchase.findOne({_id : id});
+    if(isNull(purchase)) {
+      return res.status(404).send({message: 'Purchase not found'});
     }
-    res.send(invoice);
+    res.send(purchase);
   } catch (err) {
     res.status(500).send({message: err});
   }
@@ -36,8 +36,8 @@ const update = async (req, res) => {
   const {id} = req.params;
   const data = req.body;
   try {
-    const invoice = await Invoice.updateOne({_id : id}, data, {new: true});
-    res.send(invoice);
+    const purchase = await Purchase.updateOne({_id : id}, data, {new: true});
+    res.send(purchase);
   } catch (err) {
     res.status(500).send({message: err});
   }
@@ -46,8 +46,8 @@ const update = async (req, res) => {
 const remove = async (req, res) => {
   const {id} = req.params;
   try {
-    await Invoice.deleteOne({_id : id});
-    res.status(200).send({message: 'Invoice deleted'});
+    await Purchase.deleteOne({_id : id});
+    res.status(200).send({message: 'Purchase deleted'});
   } catch (err) {
     res.status(500).send({message: err});
   }

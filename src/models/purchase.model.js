@@ -1,7 +1,7 @@
 const mongoose = require('../database');
 const uniqueValidator = require('mongoose-unique-validator');
 
-const InvoiceModel = new mongoose.Schema({
+const PurchaseModel = new mongoose.Schema({
   provider: String,
   date: {
     type: Date, 
@@ -21,8 +21,8 @@ const InvoiceModel = new mongoose.Schema({
   }],
 });
 
-InvoiceModel.plugin(uniqueValidator, { message: '{PATH} already exists!' });
+PurchaseModel.plugin(uniqueValidator, { message: '{PATH} already exists!' });
 
-const Invoice = mongoose.model('Invoice', InvoiceModel);
+const Purchase = mongoose.model('Purchase', PurchaseModel);
 
-module.exports = Invoice;
+module.exports = Purchase;
