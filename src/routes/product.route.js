@@ -15,4 +15,6 @@ router.put('/product/:id', ProductService.update);
 
 router.delete('/product/:id', ProductService.remove);
 
+router.get('/product/:id/byproducts', ProductService.getAllByProducts);
+
 module.exports = router;

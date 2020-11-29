@@ -12,16 +12,25 @@ const PurchaseModel = new mongoose.Schema({
     default: Date.now
   },
   items: [{
-    product: { 
-      type: mongoose.Schema.Types.ObjectId, 
-      ref: "Product",
-      required: true 
-    },
-    quantity: {
+    byproducts: [{
+      byproduct: { 
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: "ByProduct",
+        required: true 
+      },
+      quantity: {
+        type: Number, 
+        required: true 
+      },
+    }],
+    purchaseprice: {
       type: Number, 
       required: true 
     },
-    price: Number,
+    saleprice: {
+      type: Number, 
+      required: true 
+    }
   }],
 });
 

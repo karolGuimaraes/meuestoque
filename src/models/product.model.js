@@ -17,11 +17,19 @@ const ProductModel = new mongoose.Schema({
   },
   description: String,
   link: String,
-  saleprice: Number,
-  size: {
-    type: String,
-    enum: ['U', 'P', 'M', 'G', 'GG'],
-    default: 'U',
+  wholesalequantity: {
+    type: Number,
+    default: 0,
+    require: true
+  },
+  wholesaleprice: {
+    type: Number,
+    default: 0,
+    require: true
+  },
+  retailprice: {
+    type: Number,
+    default: 0,
     require: true
   },
   color: String,
@@ -30,11 +38,11 @@ const ProductModel = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId, 
     ref: "Category", 
   },
-})
-
-ProductModel.methods.quantity = function(){
-  return (Invoice.count({'items.Product': this}) - Sale.count({'items.Product': this}))
-}
+  byproducts: [{ 
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: "ByProduct"
+  }],
+});
 
 ProductModel.plugin(uniqueValidator, { message: '{PATH} already exists!' });
 

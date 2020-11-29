@@ -11,16 +11,19 @@ const SaleModel = new mongoose.Schema({
     ref: "Customer", 
   },
   items: [{
-    product: { 
+    byproduct: { 
       type: mongoose.Schema.Types.ObjectId, 
-      ref: "Product",
+      ref: "ByProduct",
       required: true 
     },
     quantity:  {
       type: Number, 
       required: true 
     },
-    price: Number,
+    price: {
+      type: Number, 
+      required: true 
+    },
   }],
   status: {
     type: String,

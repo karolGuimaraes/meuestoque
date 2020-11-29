@@ -1,9 +1,10 @@
 const { isNull } = require('../utils/commons');
 const Product = require('../models/product.model');
+const ByProduct = require('../models/byproduct.model');
 
 const list = async (req, res) => {
   try {
-    const products = await Product.find();
+    const products = await Product.find().populate('byproducts');
     res.send(products);
   } catch (err) {
     res.status(500).send({message: err});
@@ -22,7 +23,7 @@ const create = async (req, res) => {
 const getById = async (req, res) => {
   const {id} = req.params;
   try {
-    const product = await Product.findOne({_id : id});
+    const product = await Product.findOne({_id : id}).populate('byproducts');
     if(isNull(product)) {
       return res.status(404).send({message: 'Product not found'});
     }
@@ -35,7 +36,7 @@ const getById = async (req, res) => {
 const getByName = async (req, res) => {
   const {name} = req.params;
   try {
-    const product = await Product.find({name : name}); //Criar um index pra nome na collection Product
+    const product = await Product.find({name : name}).populate('byproducts'); //Criar um index pra nome na collection Product
     if(isNull(product)) {
       return res.status(404).send({message: 'Product not found'});
     }
@@ -50,6 +51,11 @@ const update = async (req, res) => {
   const data = req.body;
   try {
     const product = await Product.updateOne({_id : id}, data, {new: true});
+
+    for (const byproduct of data.byproducts) {
+      const byproduct_obj = await ByProduct.updateOne({_id : byproduct._id}, byproduct, {new: true});
+    }
+      
     res.send(product);
   } catch (err) {
     res.status(500).send({message: err});
@@ -66,11 +72,25 @@ const remove = async (req, res) => {
   }
 };
 
+const getAllByProducts = async (req, res) => {
+  const {id} = req.params;
+  try {
+    const byproducts = await Product.findOne({_id : id}).select('byproducts').populate('byproducts');
+    if(isNull(byproducts)) {
+      return res.status(404).send({message: 'Product not found'});
+    }
+    res.send(byproducts);
+  } catch (err) {
+    res.status(500).send({message: err});
+  }
+};
+
 module.exports = {
   list, 
   create,
   getById,
   getByName, 
   update, 
-  remove
+  remove,
+  getAllByProducts
 }

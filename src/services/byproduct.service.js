@@ -1,10 +1,10 @@
 const { isNull } = require('../utils/commons');
-const Purchase = require('../models/purchase.model');
+const  ByProduct = require('../models/byproduct.model');
 
 const list = async (req, res) => {
   try {
-    const purchases = await Purchase.find().populate({ path: 'items.byproducts.byproduct',  model: 'ByProduct' });
-    res.send(purchases);
+    const byproducts = await ByProduct.find().populate('product');
+    res.send(byproducts);
   } catch (err) {
     res.status(500).send({message: err});
   }
@@ -12,8 +12,8 @@ const list = async (req, res) => {
 
 const create = async (req, res) => {
   try {
-    const purchase = await Purchase.create(req.body);
-    res.status(201).send(purchase);
+    const product = await Product.create(req.body);
+    res.status(201).send(product);
   } catch (err) {
     res.status(500).send({message: err});
   }
@@ -22,11 +22,12 @@ const create = async (req, res) => {
 const getById = async (req, res) => {
   const {id} = req.params;
   try {
-    const purchase = await Purchase.findOne({_id : id}).populate({ path: 'items.byproducts.byproduct',  model: 'ByProduct' });
-    if(isNull(purchase)) {
-      return res.status(404).send({message: 'Purchase not found'});
+    const product = await Product.findOne({_id : id}).populate('byproducts');
+    if(isNull(product)) {
+      return res.status(404).send({message: 'Product not found'});
     }
-    res.send(purchase);
+    console.log(product.byproducts)
+    res.send(product);
   } catch (err) {
     res.status(500).send({message: err});
   }
@@ -36,8 +37,8 @@ const update = async (req, res) => {
   const {id} = req.params;
   const data = req.body;
   try {
-    const purchase = await Purchase.updateOne({_id : id}, data, {new: true});
-    res.send(purchase);
+    const product = await Product.updateOne({_id : id}, data, {new: true});
+    res.send(product);
   } catch (err) {
     res.status(500).send({message: err});
   }
@@ -46,8 +47,8 @@ const update = async (req, res) => {
 const remove = async (req, res) => {
   const {id} = req.params;
   try {
-    await Purchase.deleteOne({_id : id});
-    res.status(200).send({message: 'Purchase deleted'});
+    await Product.deleteOne({_id : id});
+    res.status(200).send({message: 'Product deleted'});
   } catch (err) {
     res.status(500).send({message: err});
   }

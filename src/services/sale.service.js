@@ -3,7 +3,7 @@ const Sale = require('../models/sale.model');
 
 const list = async (req, res) => {
   try {
-    const sales = await Sale.find();
+    const sales = await Sale.find().populate({ path: 'items.byproduct',  model: 'ByProduct' });
     res.send(sales);
   } catch (err) {
     res.status(500).send({message: err});
@@ -22,7 +22,7 @@ const create = async (req, res) => {
 const getById = async (req, res) => {
   const {id} = req.params;
   try {
-    const sale = await Sale.findOne({_id : id});
+    const sale = await Sale.findOne({_id : id}).populate({ path: 'items.byproduct',  model: 'ByProduct' });;
     if(isNull(sale)) {
       return res.status(404).send({message: 'Sale not found'});
     }

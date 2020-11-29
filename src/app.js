@@ -24,8 +24,9 @@ const customerRoute = require('./routes/customer.route');
 const purchaseRoute = require('./routes/purchase.route');
 const saleRoute = require('./routes/sale.route');
 const providerRoute = require('./routes/provider.route');
+const byProductRoute = require('./routes/byproduct.route');
 app.use('/', mainRoute, userRoute, productRoute, 
             categoryRoute, customerRoute, purchaseRoute,
-            saleRoute, providerRoute);
+            saleRoute, providerRoute, byProductRoute);
 
 app.listen(port, () => console.log(`Running in http://${host}:${port}`));
